@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VEDUUUU ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    height:100vh;
+    background:linear-gradient(135deg,#ff4e8d,#ff85a2);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    font-family:Segoe UI,sans-serif;
+}
+
+/* TEXT */
+.text{
+    position:absolute;
+    top:15%;
+    font-size:44px;
+    font-weight:bold;
+    letter-spacing:4px;
+    color:white;
+    text-shadow:0 0 20px rgba(255,255,255,.9);
+}
+
+/* HEART */
+.heart{
+    position:relative;
+    width:120px;
+    height:120px;
+    background:#ff0033;
+    transform:rotate(-45deg);
+    animation:beat 1.2s infinite;
+    cursor:pointer;
+    box-shadow:0 0 40px rgba(255,0,80,.7);
+}
+
+.heart::before,.heart::after{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:120px;
+    background:#ff0033;
+    border-radius:50%;
+}
+.heart::before{top:-60px}
+.heart::after{left:60px}
+
+@keyframes beat{
+    0%,100%{transform:rotate(-45deg) scale(1)}
+    50%{transform:rotate(-45deg) scale(1.25)}
+}
+
+/* KISS EXPLOSION */
+.kiss{
+    position:absolute;
+    font-size:26px;
+    animation:explode 1.5s forwards;
+    pointer-events:none;
+}
+
+@keyframes explode{
+    from{
+        transform:translate(0,0) scale(1);
+        opacity:1;
+    }
+    to{
+        transform:translate(var(--x),var(--y)) scale(1.8);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="text">VEDUUUU 💖</div>
+<div class="heart" id="heart"></div>
+
+<script>
+const heart = document.getElementById("heart");
+
+heart.addEventListener("click", () => {
+    for(let i=0;i<20;i++){
+        const kiss=document.createElement("div");
+        kiss.className="kiss";
+        kiss.innerHTML="💋";
+
+        const x=(Math.random()*400-200)+"px";
+        const y=(Math.random()*400-200)+"px";
+        kiss.style.setProperty("--x",x);
+        kiss.style.setProperty("--y",y);
+
+        kiss.style.left="50%";
+        kiss.style.top="50%";
+
+        document.body.appendChild(kiss);
+        setTimeout(()=>kiss.remove(),1500);
+    }
+});
+</script>
+
+</body>
+</html>
