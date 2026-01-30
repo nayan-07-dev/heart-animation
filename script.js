@@ -45,11 +45,16 @@ document.addEventListener("click", (e) => {
     setTimeout(() => heart.remove(), 1000);
 });
 
-// 🎵 Music toggle
 const music = document.getElementById("bg-music");
-const muteBtn = document.getElementById("mute-btn");
+const btn = document.getElementById("music-btn");
 
-muteBtn.addEventListener("click", () => {
-    music.muted = !music.muted;
-    muteBtn.innerHTML = music.muted ? "🔇" : "🔊";
+btn.addEventListener("click", () => {
+    if (music.paused) {
+        music.play();
+        btn.textContent = "⏸️ Pause Music";
+    } else {
+        music.pause();
+        btn.textContent = "▶️ Play Music";
+    }
 });
+
