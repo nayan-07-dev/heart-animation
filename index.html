@@ -1,111 +1,141 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>For Veduuuu ❤️</title>
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      min-height:100vh;
-      background:url('image.jpeg') center/cover no-repeat fixed;
-      display:flex;
-      justify-content:center;
-      align-items:flex-end;
-      padding-bottom:calc(env(safe-area-inset-bottom,0px) + 6vh);
-      overflow:hidden;
-      font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
-      color:#fff;
-      position:relative;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; -webkit-text-size-adjust: 100%; }
+    body {
+      min-height: 100vh;
+      background: url('image.jpeg') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 6vh);
+      overflow-x: hidden;
+      overflow-y: auto;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: #fff;
+      position: relative;
     }
-    .container{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:0.5rem;
-      z-index:5;
-      width:100%;
-      max-width:1100px;
-      padding:0 4vw;
+
+    .bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(0,0,0,0.16), rgba(0,0,0,0.28));
+      pointer-events: none;
+      z-index: 2;
     }
-    .love-text{
-      font-size:clamp(2rem,6.5vw,4.2rem);
-      font-weight:800;
-      letter-spacing:-0.6px;
-      white-space:nowrap;
-      text-align:center;
-      color:#fff;
-      display:inline-flex;
-      align-items:center;
-      gap:0.5rem;
-      -webkit-font-smoothing:antialiased;
-      text-rendering:optimizeLegibility;
-      animation:glow 1.6s ease-in-out infinite alternate;
+
+    .container {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.45rem;
+      width: 100%;
+      max-width: 1100px;
+      padding: 0 4vw;
+      overflow: visible;
     }
-    @keyframes glow{
-      from{text-shadow:0 0 8px #ff6b9a,0 0 18px #ff3b7a,0 6px 18px rgba(0,0,0,0.8)}
-      to{text-shadow:0 0 18px #ff3b7a,0 0 36px #ff6b9a,0 10px 26px rgba(0,0,0,0.75)}
+
+    .love-text {
+      font-size: clamp(1.8rem, 6.5vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      white-space: nowrap;
+      text-align: center;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      animation: glow 1.6s ease-in-out infinite alternate;
+      padding: 0 1rem;
+      line-height: 1;
+      overflow: visible;
     }
-    .emoji-row{
-      display:flex;
-      gap:0.6rem;
-      align-items:center;
-      justify-content:center;
-      flex-wrap:wrap;
-      width:100%;
-      max-width:80vw;
-      margin-top:0.2rem;
+
+    @keyframes glow {
+      from { text-shadow: 0 0 8px #ff6b9a, 0 0 18px #ff3b7a, 0 6px 18px rgba(0,0,0,0.8); }
+      to   { text-shadow: 0 0 18px #ff3b7a, 0 0 36px #ff6b9a, 0 10px 26px rgba(0,0,0,0.75); }
     }
-    .emoji{
-      font-size:clamp(1.2rem,4.2vw,2rem);
-      line-height:1;
-      display:inline-block;
-      transform-origin:center;
-      animation:beat 820ms ease-in-out infinite;
-      will-change:transform;
-      -webkit-font-smoothing:antialiased;
+
+    .emoji-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: nowrap;
+      width: 100%;
+      max-width: 95vw;
+      margin-top: 0.2rem;
+      overflow: visible;
+      white-space: nowrap;
     }
-    @keyframes beat{
-      0%{transform:scale(1)}
-      40%{transform:scale(1.12)}
-      60%{transform:scale(0.98)}
-      100%{transform:scale(1)}
+
+    .emoji {
+      font-size: clamp(1.0rem, 4.2vw, 1.9rem);
+      line-height: 1;
+      display: inline-block;
+      transform-origin: center;
+      animation: beat 820ms ease-in-out infinite;
+      will-change: transform;
+      -webkit-font-smoothing: antialiased;
+      vertical-align: middle;
+      margin: 0;
+      padding: 0;
     }
-    .floating-hearts{
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      z-index:4;
-      overflow:hidden;
+
+    @keyframes beat {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.12); }
+      60% { transform: scale(0.98); }
+      100% { transform: scale(1); }
     }
-    .tiny-heart{
-      position:absolute;
-      font-size:1.2rem;
-      opacity:0;
-      will-change:transform,opacity;
-      text-shadow:none;
-      transform-origin:center;
+
+    .floating-hearts {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 4;
+      overflow: visible;
     }
-    @keyframes rise{
-      0%{transform:translateY(120vh) rotate(0deg);opacity:0.9}
-      10%{opacity:1}
-      100%{transform:translateY(-50vh) rotate(720deg);opacity:0}
+
+    .tiny-heart {
+      position: absolute;
+      font-size: 1.2rem;
+      opacity: 0;
+      will-change: transform, opacity;
+      text-shadow: none;
+      transform-origin: center;
     }
-    @media (max-width:900px){
-      .container{max-width:92vw;padding:0 6vw}
-      .love-text{font-size:clamp(1.8rem,8.5vw,3.6rem)}
-      .emoji{font-size:clamp(1rem,6.5vw,1.8rem)}
+
+    @keyframes rise {
+      0%   { transform: translateY(120vh) rotate(0deg); opacity: 0.9; }
+      10%  { opacity: 1; }
+      100% { transform: translateY(-50vh) rotate(720deg); opacity: 0; }
     }
-    @media (max-width:420px){
-      .container{padding:0 5vw}
-      .love-text{font-size:clamp(1.6rem,10vw,2.8rem);white-space:normal}
-      .emoji{font-size:clamp(0.95rem,8.5vw,1.6rem)}
+
+    @media (max-width: 900px) {
+      .container { max-width: 92vw; padding: 0 6vw; }
+      .love-text { font-size: clamp(1.6rem, 8.5vw, 3.6rem); }
+      .emoji { font-size: clamp(0.95rem, 6.5vw, 1.6rem); }
+    }
+
+    @media (max-width: 420px) {
+      .container { padding: 0 5vw; }
+      .love-text { font-size: clamp(1.4rem, 10vw, 2.6rem); white-space: normal; }
+      .emoji { font-size: clamp(0.9rem, 8.5vw, 1.4rem); }
     }
   </style>
 </head>
 <body>
+  <div class="bg-overlay" aria-hidden="true"></div>
   <div class="floating-hearts" id="bg-hearts"></div>
 
   <div class="container" role="contentinfo" aria-label="Love message">
@@ -117,32 +147,37 @@
   </div>
 
   <script>
-    (function(){
+    (function () {
       const container = document.getElementById('bg-hearts');
-      function createHeart(){
+
+      function createHeart() {
         const heart = document.createElement('div');
         heart.className = 'tiny-heart';
-        const pool = ['💖','💕','💗','💘','😘'];
-        heart.textContent = pool[Math.floor(Math.random()*pool.length)];
-        const margin = 6;
-        const startX = margin + Math.random() * (100 - margin * 2);
+        const pool = ['💖', '💕', '💗', '💘', '😘'];
+        heart.textContent = pool[Math.floor(Math.random() * pool.length)];
+
+        const marginVW = 6;
+        const startX = marginVW + Math.random() * (100 - marginVW * 2);
         const size = 10 + Math.random() * 18;
         heart.style.left = startX + 'vw';
         heart.style.fontSize = size + 'px';
-        const duration = 1.6 + Math.random() * 1.2;
-        const delay = Math.random() * 0.18;
+
+        const duration = 1.2 + Math.random() * 1.0;
+        const delay = Math.random() * 0.12;
         heart.style.animation = `rise ${duration}s linear ${delay}s forwards`;
-        const drift = (Math.random() - 0.5) * 22;
+
+        const drift = (Math.random() - 0.5) * 20;
         heart.style.transform = `translateX(${drift}px)`;
+
         container.appendChild(heart);
-        setTimeout(()=>heart.remove(), (duration + delay) * 1000 + 200);
+        setTimeout(() => heart.remove(), (duration + delay) * 1000 + 300);
       }
-      setInterval(()=>{
-        const count = 2 + Math.floor(Math.random() * 4);
-        for(let i=0;i<count;i++) createHeart();
-      }, 220);
+
+      setInterval(() => {
+        const count = 2 + Math.floor(Math.random() * 3);
+        for (let i = 0; i < count; i++) createHeart();
+      }, 200);
     })();
   </script>
 </body>
 </html>
-```
