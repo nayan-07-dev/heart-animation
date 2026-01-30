@@ -5,86 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>For Veduuuu ❤️</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-  height: 100vh;
-  background: 
-    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),  /* dark overlay */
-    url('image.jpeg') center/cover no-repeat fixed;   /* your image here */
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  color: #fff;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    height: 100vh;
+    background: 
+      linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),  /* lighter overlay → image more visible */
+      url('image.jpeg') center / cover no-repeat fixed;
     
-
-    .container {
-      text-align: center;
-      padding: 20px;
-      max-width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #fff;
+  }
+  .container {
+    text-align: center;
+    padding: 20px;
+    max-width: 95%;
+  }
+  .main-text {
+    font-size: clamp(2.8rem, 10vw, 6rem);          /* smaller & more normal size – still big but romantic */
+    font-weight: 800;                               /* slightly lighter weight for softness */
+    line-height: 1.1;
+    letter-spacing: -1.5px;                         /* less aggressive spacing */
+    text-shadow:
+      0 0 12px #ff3366,
+      0 0 25px #ff1493,
+      0 0 45px #ff69b4;                             /* softer glow – less intense */
+    animation: pulse-glow 5s infinite alternate;    /* slower pulse for calm romance */
+  }
+  .sub-hearts {
+    font-size: clamp(2rem, 7vw, 4.5rem);           /* smaller hearts emoji */
+    animation: heartbeat 2s infinite;
+    display: block;
+    margin: 0.6em 0;
+  }
+  @keyframes pulse-glow {
+    from {
+      text-shadow: 0 0 8px #ff3366, 0 0 20px #ff1493, 0 0 40px #ff69b4;
     }
-
-    .main-text {
-      font-size: clamp(3.5rem, 14vw, 12rem);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -3px;
-      text-shadow: 
-        0 0 15px #ff3366,
-        0 0 35px #ff1493,
-        0 0 70px #ff69b4;
-      animation: pulse-glow 4s infinite alternate;
+    to {
+      text-shadow: 0 0 15px #ff1493, 0 0 35px #ff3366, 0 0 60px #ff69b4;
     }
-
-    .sub-hearts {
-      font-size: clamp(2.8rem, 10vw, 8rem);
-      animation: heartbeat 1.8s infinite;
-      display: block;
-      margin: 0.4em 0;
-    }
-
-    @keyframes pulse-glow {
-      from {
-        text-shadow: 0 0 10px #ff3366, 0 0 25px #ff1493, 0 0 50px #ff69b4;
-      }
-      to {
-        text-shadow: 0 0 25px #ff1493, 0 0 50px #ff3366, 0 0 100px #ff69b4;
-      }
-    }
-
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      50%      { transform: scale(1.18); }
-    }
-
-    .floating-hearts {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    .tiny-heart {
-      position: absolute;
-      font-size: 2rem;
-      opacity: 0;
-      animation: rise 10s linear forwards;
-      text-shadow: 0 0 10px #ff3366;
-    }
-
-    @keyframes rise {
-      0%   { transform: translateY(120vh) rotate(0deg); opacity: 0.8; }
-      15%  { opacity: 1; }
-      100% { transform: translateY(-30vh) rotate(1080deg); opacity: 0; }
-    }
-  </style>
+  }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }                 /* gentler beat */
+  }
+  .floating-hearts {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .tiny-heart {
+    position: absolute;
+    font-size: 1.8rem;                              /* slightly smaller floating hearts */
+    opacity: 0;
+    animation: rise 12s linear forwards;            /* slower rise for dreamy feel */
+    text-shadow: 0 0 8px #ff3366;
+  }
+  @keyframes rise {
+    0% { transform: translateY(120vh) rotate(0deg); opacity: 0.7; }
+    15% { opacity: 1; }
+    100% { transform: translateY(-40vh) rotate(720deg); opacity: 0; }
+  }
+</style>
 </head>
 <body>
 
