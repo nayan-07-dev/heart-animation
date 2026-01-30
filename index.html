@@ -5,178 +5,128 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>For Veduuuu ❤️</title>
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      height:100vh;
-      overflow:hidden;
-      position:relative;
+      height: 100vh;
+      background: linear-gradient(135deg, #2c003e, #ff3366, #ff6b6b);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background:#000; /* fallback if image fails */
+      color: white;
     }
-    /* Your uploaded image full screen */
-    .love-img {
-      position:fixed;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      z-index:1;
-      filter: brightness(0.85); /* slight dim for text visibility */
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      max-width: 95%;
     }
-    .overlay {
-      position:fixed;
-      inset:0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
-      z-index:2;
-      pointer-events:none;
+
+    .main-text {
+      font-size: clamp(3rem, 12vw, 10rem);
+      font-weight: bold;
+      line-height: 1.1;
+      margin-bottom: 0.5em;
+      text-shadow: 
+        0 0 10px rgba(255, 51, 102, 0.8),
+        0 0 30px rgba(255, 51, 102, 0.6),
+        0 0 60px rgba(255, 107, 107, 0.4);
+      animation: glow 3s infinite alternate;
+      letter-spacing: -2px;
     }
-    /* Popping hearts */
-    .heart-pop {
-      position:absolute;
-      width:28px;
-      height:25px;
-      background:#ff3366;
-      transform:rotate(-45deg);
-      opacity:0;
-      z-index:5;
-      pointer-events:none;
+
+    .hearts {
+      font-size: clamp(2rem, 8vw, 6rem);
+      animation: beat 1.6s infinite;
+      display: block;
+      margin: 0.3em 0;
     }
-    .heart-pop::before,
-    .heart-pop::after {
-      content:"";
-      position:absolute;
-      width:28px;
-      height:25px;
-      background:#ff3366;
-      border-radius:50%;
+
+    @keyframes glow {
+      from {
+        text-shadow: 
+          0 0 10px #ff3366,
+          0 0 20px #ff3366,
+          0 0 40px #ff69b4;
+      }
+      to {
+        text-shadow: 
+          0 0 20px #ff1493,
+          0 0 40px #ff3366,
+          0 0 80px #ff69b4;
+      }
     }
-    .heart-pop::before { top:-14px; left:0; }
-    .heart-pop::after  { left:14px; top:0; }
-    @keyframes pop-beat {
-      0%   { transform:rotate(-45deg) scale(0.3); opacity:0; }
-      30%  { transform:rotate(-45deg) scale(1.35); opacity:0.9; }
-      60%  { transform:rotate(-45deg) scale(1.1);  opacity:0.7; }
-      100% { transform:rotate(-45deg) scale(0.6);  opacity:0; }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.25); }
     }
-    /* Floating emojis */
-    .emoji {
-      position:absolute;
-      font-size:28px;
-      z-index:4;
-      pointer-events:none;
-      animation:float-up 7s linear forwards;
+
+    .small-hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      overflow: hidden;
     }
+
+    .tiny-heart {
+      position: absolute;
+      font-size: 1.5rem;
+      color: #fff;
+      opacity: 0;
+      animation: float-up 8s linear forwards;
+      text-shadow: 0 0 8px rgba(255, 51, 102, 0.9);
+    }
+
     @keyframes float-up {
-      from { transform:translateY(0) rotate(0deg); opacity:1; }
-      to   { transform:translateY(-130vh) rotate(360deg); opacity:0; }
-    }
-    /* Love text overlay */
-    .love-text {
-      position:fixed;
-      top:50%;
-      left:50%;
-      transform:translate(-50%, -50%);
-      z-index:10;
-      color:#fff;
-      font-size:5vw; /* responsive size */
-      font-weight:bold;
-      text-align:center;
-      text-shadow: 0 0 20px #ff3366, 0 0 40px #ff3366;
-      animation: glow-text 3s infinite alternate;
-      pointer-events:none;
-      white-space:nowrap;
-    }
-    @keyframes glow-text {
-      from { text-shadow: 0 0 10px #ff3366, 0 0 20px #ff3366, 0 0 30px #ff1493; }
-      to   { text-shadow: 0 0 30px #ff3366, 0 0 60px #ff1493, 0 0 90px #ff69b4; }
-    }
-    /* Music player (YouTube embed for Dooron Dooron) */
-    #music-player {
-      position:fixed;
-      bottom:20px;
-      right:20px;
-      z-index:15;
-      width:300px;
-      height:80px;
-      opacity:0.85;
-      transition:opacity 0.4s;
-    }
-    #music-player:hover { opacity:1; }
-    /* Music button fallback if embed issues */
-    #music-btn {
-      position:fixed;
-      bottom:20px;
-      left:20px;
-      z-index:15;
-      padding:12px 20px;
-      font-size:18px;
-      border-radius:50px;
-      background:rgba(255,255,255,0.2);
-      border:1px solid rgba(255,255,255,0.5);
-      color:white;
-      cursor:pointer;
-      backdrop-filter:blur(8px);
+      0%   { transform: translateY(100vh) rotate(0deg); opacity: 0.9; }
+      20%  { opacity: 1; }
+      100% { transform: translateY(-20vh) rotate(720deg); opacity: 0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Your uploaded image (the kiss selfie at night) -->
-  <img src="YOUR_UPLOADED_IMAGE_HERE" class="love-img" alt="You & Veduuuu ❤️">
+  <div class="small-hearts" id="hearts-bg"></div>
 
-  <div class="overlay"></div>
-
-  <!-- Big love text -->
-  <div class="love-text">I LOVE YOU<br>VEDUUUUUU ❤️</div>
-
-  <!-- Dooron Dooron music - YouTube embed (plays audio) -->
-  <iframe 
-    id="music-player"
-    src="https://www.youtube.com/embed/LV_wiOhO40Q?autoplay=0&loop=1&playlist=LV_wiOhO40Q&mute=0&controls=1&modestbranding=1"
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
-  </iframe>
-
-  <!-- Fallback music button (if you prefer manual play) -->
-  <button id="music-btn">▶ Play Dooron Dooron</button>
+  <div class="container">
+    <div class="main-text">
+      I LOVE YOU<br>VEDUUUUU
+    </div>
+    <div class="hearts">💕💞💓</div>
+  </div>
 
   <script>
-    // Popping hearts
-    function createPopHeart() {
-      const heart = document.createElement("div");
-      heart.className = "heart-pop";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.top  = Math.random() * 100 + "vh";
-      const scale = 0.6 + Math.random() * 1.0;
-      heart.style.transform = `rotate(-45deg) scale(${scale})`;
-      const hue = 330 + Math.floor(Math.random() * 40);
-      heart.style.background = `hsl(${hue}, 90%, 60%)`;
-      document.body.appendChild(heart);
-      heart.style.animation = `pop-beat 2s forwards`;
-      setTimeout(() => heart.remove(), 2500);
+    // Floating tiny hearts background
+    const heartsContainer = document.getElementById('hearts-bg');
+    const heartChars = ['💕', '💞', '💓', '❤️', '💗', '💖'];
+
+    function createTinyHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'tiny-heart';
+      heart.textContent = heartChars[Math.floor(Math.random() * heartChars.length)];
+      
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (6 + Math.random() * 8) + 's';
+      heart.style.animationDelay = Math.random() * 3 + 's';
+      
+      heartsContainer.appendChild(heart);
+      
+      setTimeout(() => heart.remove(), 12000);
     }
-    setInterval(createPopHeart, 500);
 
-    // Floating emojis
-    const emojis = ["❤️","💖","💕","✨","🌙","💋"];
-    setInterval(() => {
-      const emoji = document.createElement("div");
-      emoji.className = "emoji";
-      emoji.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-      emoji.style.left = Math.random()*100 + "vw";
-      emoji.style.bottom = "-10vh";
-      emoji.style.fontSize = (25 + Math.random()*50) + "px";
-      const drift = (Math.random()-0.5)*300;
-      emoji.style.transform = `translateX(${drift}px)`;
-      document.body.appendChild(emoji);
-      setTimeout(() => emoji.remove(), 8000);
-    }, 700);
-
-    // Optional: Music toggle for fallback (if YouTube embed blocked)
-    document.getElementById("music-btn").addEventListener("click", () => {
-      alert("For best experience, use the YouTube player below to play 'Dooron Dooron' ❤️\n(It loops automatically!)");
-    });
+    // Start creating hearts
+    setInterval(createTinyHeart, 400);
   </script>
+
 </body>
 </html>
