@@ -1,28 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>For Veduuuu ❤️</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>For Veduuuu ❤️</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    height:100vh;
+    background:linear-gradient(135deg,#ff416c,#ff4b2b);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    font-family:Segoe UI, sans-serif;
+    position:relative;
+}
+
+.container{
+    text-align:center;
+    color:white;
+    z-index:2;
+}
+
+.heart{
+    width:140px;
+    height:140px;
+    background:#ff0033;
+    position:relative;
+    transform:rotate(-45deg);
+    animation:beat 0.9s infinite;
+    margin:0 auto 30px;
+    box-shadow:0 0 40px rgba(255,0,60,0.8);
+}
+
+.heart::before,.heart::after{
+    content:"";
+    width:140px;
+    height:140px;
+    background:#ff0033;
+    border-radius:50%;
+    position:absolute;
+}
+.heart::before{top:-70px;left:0}
+.heart::after{left:70px;top:0}
+
+@keyframes beat{
+    0%{transform:rotate(-45deg) scale(1);}
+    50%{transform:rotate(-45deg) scale(1.25);}
+    100%{transform:rotate(-45deg) scale(1);}
+}
+
+.love-img{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid white;
+    box-shadow:0 0 20px rgba(255,255,255,0.8);
+    margin-bottom:20px;
+}
+
+h1{
+    font-size:3.2rem;
+    letter-spacing:2px;
+    animation:textGlow 2s infinite alternate;
+}
+
+@keyframes textGlow{
+    from { text-shadow:0 0 10px pink; }
+    to { text-shadow:0 0 30px white; }
+}
+
+p{
+    font-size:1.2rem;
+}
+
+.kiss{
+    position:absolute;
+    font-size:30px;
+    animation:kiss 3s linear forwards;
+}
+
+@keyframes kiss{
+    from{transform:translateY(0) scale(1);opacity:1;}
+    to{transform:translateY(-150px) scale(1.5);opacity:0;}
+}
+
+.click-heart{
+    position:absolute;
+    font-size:25px;
+    animation:burst 1s ease-out forwards;
+}
+
+@keyframes burst{
+    from{transform:scale(1);opacity:1;}
+    to{transform:scale(2);opacity:0;}
+}
+
+@keyframes float{
+    from{transform:translateY(0);opacity:1;}
+    to{transform:translateY(-110vh);opacity:0;}
+}
+
+@keyframes spark-float{
+    from{transform:translateY(0);opacity:1;}
+    to{transform:translateY(-120vh);opacity:0;}
+}
+
+/* background glow */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 70%);
+    animation:glow 4s infinite alternate;
+    z-index:0;
+}
+@keyframes glow{
+    from{opacity:0.4;}
+    to{opacity:0.8;}
+}
+</style>
 </head>
 <body>
 
-   <audio id="bg-music" loop>
-    <source src="music.mp3" type="audio/mpeg">
+<!-- MUSIC -->
+<audio id="bg-music" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2021/12/04/audio_1b9f5b23b8.mp3?filename=love-story-114806.mp3" type="audio/mpeg">
 </audio>
-<button id="music-btn">▶️ Play Music</button>
+<button id="music-btn" style="position:fixed;top:15px;right:15px;font-size:20px;padding:10px;border-radius:50%;background:rgba(255,255,255,0.3);border:none;cursor:pointer;z-index:10;">▶️ Play Music</button>
 
+<div class="container">
+    <div class="heart"></div>
+    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" class="love-img">
+    <h1>VEDUUUU 💋</h1>
+    <p>Sending you endless kisses 😘</p>
+</div>
 
+<script>
+// ================= Floating hearts
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.style.position = "absolute";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.bottom = "-20px";
+    heart.style.fontSize = Math.random() * 20 + 20 + "px";
+    heart.style.animation = "float 5s linear";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+}, 300);
 
-    <div class="container">
-        <div class="heart"></div>
+// ================= Blowing kisses
+setInterval(() => {
+    const kiss = document.createElement("div");
+    kiss.className = "kiss";
+    kiss.innerHTML = "💋";
+    kiss.style.left = Math.random() * 100 + "vw";
+    kiss.style.bottom = "50px";
+    document.body.appendChild(kiss);
+    setTimeout(() => kiss.remove(), 3000);
+}, 1200);
 
-        <img src="image.jpg" class="love-img">
+// ================= Click heart burst
+document.addEventListener("click", (e) => {
+    const clickHeart = document.createElement("div");
+    clickHeart.className = "click-heart";
+    clickHeart.innerHTML = "❤️";
+    clickHeart.style.left = e.clientX + "px";
+    clickHeart.style.top = e.clientY + "px";
+    document.body.appendChild(clickHeart);
+    setTimeout(() => clickHeart.remove(), 1000);
+});
 
-        <h1>VEDUUUU 💋</h1>
-        <p>Sending you endless kisses 😘</p>
-    </div>
+// ================= Floating sparkles
+setInterval(() => {
+    const spark = document.createElement("div");
+    spark.textContent = "✨";
+    spark.style.position = "absolute";
+    spark.style.left = Math.random() * 100 + "vw";
+    spark.style.top = "100vh";
+    spark.style.fontSize = "20px";
+    spark.style.animation = "spark-float 4s linear";
+    document.body.appendChild(spark);
+    setTimeout(() => spark.remove(), 4000);
+}, 600);
 
-    <script src="script.js"></script>
+// ================= Music button
+const music = document.getElementById("bg-music");
+const btn = document.getElementById("music-btn");
+
+btn.addEventListener("click", () => {
+    if(music.paused){
+        music.play();
+        btn.textContent = "⏸️ Pause Music";
+    } else {
+        music.pause();
+        btn.textContent = "▶️ Play Music";
+    }
+});
+</script>
+
 </body>
 </html>
