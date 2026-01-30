@@ -13,13 +13,13 @@
 
     body {
       height: 100vh;
-      background: linear-gradient(135deg, #2c003e, #ff3366, #ff6b6b);
+      background: linear-gradient(135deg, #1a0033, #ff3366, #ff4d4d);
       display: flex;
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: #fff;
     }
 
     .container {
@@ -29,103 +29,86 @@
     }
 
     .main-text {
-      font-size: clamp(3rem, 12vw, 10rem);
-      font-weight: bold;
-      line-height: 1.1;
-      margin-bottom: 0.5em;
+      font-size: clamp(3.5rem, 14vw, 12rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -3px;
       text-shadow: 
-        0 0 10px rgba(255, 51, 102, 0.8),
-        0 0 30px rgba(255, 51, 102, 0.6),
-        0 0 60px rgba(255, 107, 107, 0.4);
-      animation: glow 3s infinite alternate;
-      letter-spacing: -2px;
+        0 0 15px #ff3366,
+        0 0 35px #ff1493,
+        0 0 70px #ff69b4;
+      animation: pulse-glow 4s infinite alternate;
     }
 
-    .hearts {
-      font-size: clamp(2rem, 8vw, 6rem);
-      animation: beat 1.6s infinite;
+    .sub-hearts {
+      font-size: clamp(2.8rem, 10vw, 8rem);
+      animation: heartbeat 1.8s infinite;
       display: block;
-      margin: 0.3em 0;
+      margin: 0.4em 0;
     }
 
-    @keyframes glow {
+    @keyframes pulse-glow {
       from {
-        text-shadow: 
-          0 0 10px #ff3366,
-          0 0 20px #ff3366,
-          0 0 40px #ff69b4;
+        text-shadow: 0 0 10px #ff3366, 0 0 25px #ff1493, 0 0 50px #ff69b4;
       }
       to {
-        text-shadow: 
-          0 0 20px #ff1493,
-          0 0 40px #ff3366,
-          0 0 80px #ff69b4;
+        text-shadow: 0 0 25px #ff1493, 0 0 50px #ff3366, 0 0 100px #ff69b4;
       }
     }
 
-    @keyframes beat {
+    @keyframes heartbeat {
       0%, 100% { transform: scale(1); }
-      50%      { transform: scale(1.25); }
+      50%      { transform: scale(1.18); }
     }
 
-    .small-hearts {
+    .floating-hearts {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
+      inset: 0;
       pointer-events: none;
-      overflow: hidden;
     }
 
     .tiny-heart {
       position: absolute;
-      font-size: 1.5rem;
-      color: #fff;
+      font-size: 2rem;
       opacity: 0;
-      animation: float-up 8s linear forwards;
-      text-shadow: 0 0 8px rgba(255, 51, 102, 0.9);
+      animation: rise 10s linear forwards;
+      text-shadow: 0 0 10px #ff3366;
     }
 
-    @keyframes float-up {
-      0%   { transform: translateY(100vh) rotate(0deg); opacity: 0.9; }
-      20%  { opacity: 1; }
-      100% { transform: translateY(-20vh) rotate(720deg); opacity: 0; }
+    @keyframes rise {
+      0%   { transform: translateY(120vh) rotate(0deg); opacity: 0.8; }
+      15%  { opacity: 1; }
+      100% { transform: translateY(-30vh) rotate(1080deg); opacity: 0; }
     }
   </style>
 </head>
 <body>
 
-  <div class="small-hearts" id="hearts-bg"></div>
+  <div class="floating-hearts" id="bg-hearts"></div>
 
   <div class="container">
-    <div class="main-text">
-      I LOVE YOU<br>VEDUUUUU
-    </div>
-    <div class="hearts">💕💞💓</div>
+    <div class="main-text">I LOVE YOU<br>VEDUUUUU</div>
+    <div class="sub-hearts">💕💞💓</div>
   </div>
 
   <script>
-    // Floating tiny hearts background
-    const heartsContainer = document.getElementById('hearts-bg');
-    const heartChars = ['💕', '💞', '💓', '❤️', '💗', '💖'];
+    const container = document.getElementById('bg-hearts');
+    const hearts = ['💕', '💞', '💓', '❤️', '💗', '💖', '💘'];
 
-    function createTinyHeart() {
-      const heart = document.createElement('div');
-      heart.className = 'tiny-heart';
-      heart.textContent = heartChars[Math.floor(Math.random() * heartChars.length)];
+    function spawnHeart() {
+      const el = document.createElement('div');
+      el.className = 'tiny-heart';
+      el.textContent = hearts[Math.floor(Math.random() * hearts.length)];
       
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (6 + Math.random() * 8) + 's';
-      heart.style.animationDelay = Math.random() * 3 + 's';
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.animationDuration = (7 + Math.random() * 9) + 's';
+      el.style.animationDelay = Math.random() * 4 + 's';
       
-      heartsContainer.appendChild(heart);
-      
-      setTimeout(() => heart.remove(), 12000);
+      container.appendChild(el);
+      setTimeout(() => el.remove(), 15000);
     }
 
-    // Start creating hearts
-    setInterval(createTinyHeart, 400);
+    setInterval(spawnHeart, 350);
   </script>
 
 </body>
