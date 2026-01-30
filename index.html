@@ -108,8 +108,6 @@
     <div class="love-text">I LOVE YOU VEDUUUUU</div>
     <div class="emoji-row" aria-hidden="true">
       <span class="emoji">💞</span>
-      <span class="emoji">😘</span>
-      <span class="emoji">❤️</span>
     </div>
   </div>
 
@@ -119,7 +117,7 @@
       function createHeart(){
         const heart = document.createElement('div');
         heart.className = 'tiny-heart';
-        heart.textContent = ['💖','💕','💗','💘'][Math.floor(Math.random()*4)];
+        heart.textContent = ['💖','💕','💗','💘','😘'][Math.floor(Math.random()*5)];
         const startX = Math.random()*100;
         const size = 10 + Math.random()*22;
         heart.style.left = startX + 'vw';
