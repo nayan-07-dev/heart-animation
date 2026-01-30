@@ -1,158 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>For Veduuuu ❤️</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Veduuuu ❤️</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body{
-    height:100vh;
-    background:linear-gradient(135deg,#ff416c,#ff4b2b);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-    font-family:Segoe UI, sans-serif;
-    position:relative;
-}
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      overflow: hidden;
+      font-family: Segoe UI, sans-serif;
+      position: relative;
+    }
 
-.container{
-    position:relative;
-    width:80%;
-    height:80%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-}
+    /* Full-screen image */
+    .love-img {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
 
-/* FULL SIZE IMAGE */
-.love-img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
+    /* Overlay to make image slightly darker so text/buttons visible */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.25);
+      z-index: 2;
+      pointer-events: none;
+    }
 
-/* SMALL BEATING HEART */
-.small-heart{
-    width:30px;
-    height:30px;
-    background:red;
-    position:absolute;
-    transform:rotate(-45deg);
-    animation:beat 0.8s infinite;
-}
+    /* Random popping hearts */
+    .heart-pop {
+      position: absolute;
+      width: 28px;
+      height: 25px;
+      background: #ff3366;
+      transform: rotate(-45deg);
+      opacity: 0;
+      z-index: 5;
+      pointer-events: none;
+    }
 
-.small-heart::before,
-.small-heart::after{
-    content:"";
-    width:30px;
-    height:30px;
-    background:red;
-    border-radius:50%;
-    position:absolute;
-}
-.small-heart::before{top:-15px;left:0;}
-.small-heart::after{left:15px;top:0;}
+    .heart-pop::before,
+    .heart-pop::after {
+      content: "";
+      position: absolute;
+      width: 28px;
+      height: 25px;
+      background: #ff3366;
+      border-radius: 50%;
+    }
 
-@keyframes beat{
-    0%{transform:rotate(-45deg) scale(1);}
-    50%{transform:rotate(-45deg) scale(1.3);}
-    100%{transform:rotate(-45deg) scale(1);}
-}
+    .heart-pop::before {
+      top: -14px;
+      left: 0;
+    }
 
-/* Floating emojis */
-.emoji{
-    position:absolute;
-    font-size:25px;
-    animation:float 5s linear forwards;
-}
+    .heart-pop::after {
+      left: 14px;
+      top: 0;
+    }
 
-@keyframes float{
-    from{transform:translateY(0);opacity:1;}
-    to{transform:translateY(-100vh);opacity:0;}
-}
+    @keyframes pop-beat {
+      0%   { transform: rotate(-45deg) scale(0.3); opacity: 0; }
+      30%  { transform: rotate(-45deg) scale(1.35); opacity: 0.9; }
+      60%  { transform: rotate(-45deg) scale(1.1); opacity: 0.7; }
+      100% { transform: rotate(-45deg) scale(0.6); opacity: 0; }
+    }
 
-/* Background glow */
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 70%);
-    animation:glow 4s infinite alternate;
-    z-index:0;
-}
-@keyframes glow{
-    from{opacity:0.4;}
-    to{opacity:0.8;}
-}
+    /* Floating emojis */
+    .emoji {
+      position: absolute;
+      font-size: 28px;
+      z-index: 4;
+      pointer-events: none;
+      animation: float-up 6s linear forwards;
+    }
 
-/* Music button */
-#music-btn{
-    position:fixed;
-    top:15px;
-    right:15px;
-    font-size:20px;
-    padding:10px;
-    border-radius:50%;
-    background:rgba(255,255,255,0.3);
-    border:none;
-    cursor:pointer;
-    z-index:10;
-}
-</style>
+    @keyframes float-up {
+      from { transform: translateY(0); opacity: 1; }
+      to   { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    /* Music button */
+    #music-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 10;
+      padding: 12px 16px;
+      font-size: 18px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: white;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      transition: all 0.3s;
+    }
+
+    #music-btn:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(1.08);
+    }
+  </style>
 </head>
 <body>
 
-<!-- MUSIC -->
-<audio id="bg-music" loop>
+  <!-- Full-screen background image -->
+  <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" class="love-img" alt="Love background">
+
+  <!-- Slight dark overlay -->
+  <div class="overlay"></div>
+
+  <!-- Music control -->
+  <audio id="bg-music" loop preload="auto">
     <source src="https://cdn.pixabay.com/download/audio/2021/12/04/audio_1b9f5b23b8.mp3?filename=love-story-114806.mp3" type="audio/mpeg">
-</audio>
-<button id="music-btn">▶️ Play Music</button>
+    <!-- Alternative: https://cdn.pixabay.com/download/audio/2022/03/15/audio_d4d7d078c8.mp3 (another romantic one) -->
+  </audio>
 
-<div class="container">
-    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" class="love-img">
-</div>
+  <button id="music-btn">▶ Play Music</button>
 
-<script>
-// ================= SMALL BEATING HEARTS FLOATING
-setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "small-heart";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.top = Math.random() * window.innerHeight + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-}, 700);
+  <script>
+    // ================= RANDOM POPPING HEARTS =================
+    function createPopHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart-pop";
+      
+      // Random position
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight;
+      
+      heart.style.left = x + "px";
+      heart.style.top  = y + "px";
+      
+      // Random size & color variation
+      const scale = 0.7 + Math.random() * 0.9;
+      heart.style.transform = `rotate(-45deg) scale(${scale})`;
+      heart.style.setProperty('--random-delay', Math.random() * 0.4 + 's');
+      
+      // Slight color variation
+      const hue = 330 + Math.floor(Math.random() * 30);
+      heart.style.background = `hsl(${hue}, 90%, 60%)`;
+      heart.querySelectorAll('::before, ::after').forEach(el => {
+        el.style.background = `hsl(${hue}, 90%, 60%)`;
+      });
 
-// ================= FLOATING EMOJIS 💋❤️✨
-const emojis = ["💋","❤️","✨"];
-setInterval(() => {
-    const emoji = document.createElement("div");
-    emoji.className = "emoji";
-    emoji.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-    emoji.style.left = Math.random() * window.innerWidth + "px";
-    emoji.style.bottom = "-50px";
-    emoji.style.fontSize = Math.random() * 30 + 20 + "px";
-    document.body.appendChild(emoji);
-    setTimeout(() => emoji.remove(), 5000);
-}, 400);
+      document.body.appendChild(heart);
 
-// ================= MUSIC BUTTON
-const music = document.getElementById("bg-music");
-const btn = document.getElementById("music-btn");
-
-btn.addEventListener("click", () => {
-    if(music.paused){
-        music.play();
-        btn.textContent = "⏸️ Pause Music";
-    } else {
-        music.pause();
-        btn.textContent = "▶️ Play Music";
+      // Trigger animation
+      heart.style.animation = `pop-beat 1.8s forwards`;
+      
+      // Remove after animation
+      setTimeout(() => heart.remove(), 2200);
     }
-});
-</script>
 
+    // Create hearts randomly
+    setInterval(createPopHeart, 600);
+
+    // ================= FLOATING EMOJIS =================
+    const emojis = ["❤️", "💖", "✨", "💫", "💋"];
+    setInterval(() => {
+      const emoji = document.createElement("div");
+      emoji.className = "emoji";
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      
+      emoji.style.left = Math.random() * 100 + "vw";
+      emoji.style.bottom = "-10vh";
+      emoji.style.fontSize = (20 + Math.random() * 40) + "px";
+      
+      // Random horizontal drift
+      const drift = (Math.random() - 0.5) * 200;
+      emoji.style.transform = `translateX(${drift}px)`;
+      
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 7000);
+    }, 800);
+
+    // ================= MUSIC BUTTON =================
+    const music = document.getElementById("bg-music");
+    const btn = document.getElementById("music-btn");
+
+    btn.addEventListener("click", () => {
+      if (music.paused || music.ended) {
+        music.play().catch(err => {
+          console.log("Autoplay prevented:", err);
+          // Some browsers may still block → user must interact
+        });
+        btn.textContent = "⏸ Pause Music";
+      } else {
+        music.pause();
+        btn.textContent = "▶ Play Music";
+      }
+    });
+
+    // Optional: Try gentle autoplay on mobile/desktop after load (usually blocked)
+    // music.volume = 0.4;
+    // music.play().catch(() => console.log("Autoplay blocked - waiting for user click"));
+  </script>
 </body>
 </html>
