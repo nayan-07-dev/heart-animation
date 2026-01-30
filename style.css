@@ -21,14 +21,16 @@ body {
 }
 
 .heart {
-    width: 120px;
-    height: 120px;
-    background: red;
+    width: 140px;
+    height: 140px;
+    background: #ff0033;
     position: relative;
     transform: rotate(-45deg);
-    animation: beat 1s infinite;
-    margin: 0 auto 25px;
+    animation: beat 0.9s infinite;
+    margin: 0 auto 30px;
+    box-shadow: 0 0 40px rgba(255,0,60,0.8);
 }
+
 
 .heart::before,
 .heart::after {
@@ -67,8 +69,14 @@ body {
 }
 
 h1 {
-    font-size: 3rem;
-    text-shadow: 0 0 10px #fff, 0 0 25px pink;
+    font-size: 3.2rem;
+    letter-spacing: 2px;
+    animation: textGlow 2s infinite alternate;
+}
+
+@keyframes textGlow {
+    from { text-shadow: 0 0 10px pink; }
+    to { text-shadow: 0 0 30px white; }
 }
 
 p {
@@ -110,3 +118,22 @@ p {
     from { transform: scale(1); opacity: 1; }
     to { transform: scale(2); opacity: 0; }
 }
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 70%);
+    animation: glow 4s infinite alternate;
+    z-index: 0;
+}
+
+@keyframes glow {
+    from { opacity: 0.4; }
+    to { opacity: 0.8; }
+}
+@keyframes spark-float {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-120vh); opacity: 0; }
+}
+
+
