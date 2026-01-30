@@ -1,4 +1,6 @@
+// =========================
 // Floating hearts
+// =========================
 setInterval(() => {
     const heart = document.createElement("div");
     heart.innerHTML = "❤️";
@@ -12,16 +14,9 @@ setInterval(() => {
     setTimeout(() => heart.remove(), 5000);
 }, 300);
 
-// Floating animation
-const style = document.createElement("style");
-style.innerHTML = `
-@keyframes float {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-110vh); opacity: 0; }
-}`;
-document.head.appendChild(style);
-
-// 💋 Blowing kisses
+// =========================
+// Blowing kisses 💋
+// =========================
 setInterval(() => {
     const kiss = document.createElement("div");
     kiss.className = "kiss";
@@ -33,18 +28,39 @@ setInterval(() => {
     setTimeout(() => kiss.remove(), 3000);
 }, 1200);
 
-// 👆 Click heart burst
+// =========================
+// Click heart burst
+// =========================
 document.addEventListener("click", (e) => {
-    const heart = document.createElement("div");
-    heart.className = "click-heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = e.clientX + "px";
-    heart.style.top = e.clientY + "px";
-    document.body.appendChild(heart);
+    const clickHeart = document.createElement("div");
+    clickHeart.className = "click-heart";
+    clickHeart.innerHTML = "❤️";
+    clickHeart.style.left = e.clientX + "px";
+    clickHeart.style.top = e.clientY + "px";
+    document.body.appendChild(clickHeart);
 
-    setTimeout(() => heart.remove(), 1000);
+    setTimeout(() => clickHeart.remove(), 1000);
 });
 
+// =========================
+// Floating sparkles ✨
+// =========================
+setInterval(() => {
+    const spark = document.createElement("div");
+    spark.textContent = "✨";
+    spark.style.position = "absolute";
+    spark.style.left = Math.random() * 100 + "vw";
+    spark.style.top = "100vh";
+    spark.style.fontSize = "20px";
+    spark.style.animation = "spark-float 4s linear";
+    document.body.appendChild(spark);
+
+    setTimeout(() => spark.remove(), 4000);
+}, 600);
+
+// =========================
+// Music button 🎵
+// =========================
 const music = document.getElementById("bg-music");
 const btn = document.getElementById("music-btn");
 
@@ -57,4 +73,3 @@ btn.addEventListener("click", () => {
         btn.textContent = "▶️ Play Music";
     }
 });
-
