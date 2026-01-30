@@ -5,207 +5,146 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>For Veduuuu ❤️</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      height: 100vh;
-      background: linear-gradient(135deg, #ff416c, #ff4b2b);
-      overflow: hidden;
-      font-family: Segoe UI, sans-serif;
-      position: relative;
+      height:100vh;
+      background:linear-gradient(135deg, #ff416c, #ff4b2b);
+      overflow:hidden;
+      position:relative;
+      font-family:Segoe UI, sans-serif;
     }
-
-    /* Full-screen image */
     .love-img {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 1;
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:1;
     }
-
-    /* Overlay to make image slightly darker so text/buttons visible */
     .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.25);
-      z-index: 2;
-      pointer-events: none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.3);
+      z-index:2;
+      pointer-events:none;
     }
-
-    /* Random popping hearts */
     .heart-pop {
-      position: absolute;
-      width: 28px;
-      height: 25px;
-      background: #ff3366;
-      transform: rotate(-45deg);
-      opacity: 0;
-      z-index: 5;
-      pointer-events: none;
+      position:absolute;
+      width:28px;
+      height:25px;
+      background:#ff3366;
+      transform:rotate(-45deg);
+      opacity:0;
+      z-index:5;
+      pointer-events:none;
     }
-
     .heart-pop::before,
     .heart-pop::after {
-      content: "";
-      position: absolute;
-      width: 28px;
-      height: 25px;
-      background: #ff3366;
-      border-radius: 50%;
+      content:"";
+      position:absolute;
+      width:28px;
+      height:25px;
+      background:#ff3366;
+      border-radius:50%;
     }
-
-    .heart-pop::before {
-      top: -14px;
-      left: 0;
-    }
-
-    .heart-pop::after {
-      left: 14px;
-      top: 0;
-    }
-
+    .heart-pop::before { top:-14px; left:0; }
+    .heart-pop::after  { left:14px; top:0; }
     @keyframes pop-beat {
-      0%   { transform: rotate(-45deg) scale(0.3); opacity: 0; }
-      30%  { transform: rotate(-45deg) scale(1.35); opacity: 0.9; }
-      60%  { transform: rotate(-45deg) scale(1.1); opacity: 0.7; }
-      100% { transform: rotate(-45deg) scale(0.6); opacity: 0; }
+      0%   { transform:rotate(-45deg) scale(0.3); opacity:0; }
+      30%  { transform:rotate(-45deg) scale(1.35); opacity:0.9; }
+      60%  { transform:rotate(-45deg) scale(1.1); opacity:0.7; }
+      100% { transform:rotate(-45deg) scale(0.6); opacity:0; }
     }
-
-    /* Floating emojis */
     .emoji {
-      position: absolute;
-      font-size: 28px;
-      z-index: 4;
-      pointer-events: none;
-      animation: float-up 6s linear forwards;
+      position:absolute;
+      font-size:28px;
+      z-index:4;
+      pointer-events:none;
+      animation:float-up 6s linear forwards;
     }
-
     @keyframes float-up {
-      from { transform: translateY(0); opacity: 1; }
-      to   { transform: translateY(-120vh); opacity: 0; }
+      from { transform:translateY(0); opacity:1; }
+      to   { transform:translateY(-120vh); opacity:0; }
     }
-
-    /* Music button */
     #music-btn {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      z-index: 10;
-      padding: 12px 16px;
-      font-size: 18px;
-      border-radius: 50px;
-      background: rgba(255, 255, 255, 0.25);
-      border: 1px solid rgba(255,255,255,0.4);
-      color: white;
-      cursor: pointer;
-      backdrop-filter: blur(6px);
-      transition: all 0.3s;
+      position:fixed;
+      top:15px;
+      right:15px;
+      z-index:10;
+      padding:12px 16px;
+      font-size:18px;
+      border-radius:50px;
+      background:rgba(255,255,255,0.25);
+      border:1px solid rgba(255,255,255,0.4);
+      color:white;
+      cursor:pointer;
+      backdrop-filter:blur(6px);
+      transition:all 0.3s;
     }
-
     #music-btn:hover {
-      background: rgba(255, 255, 255, 0.4);
-      transform: scale(1.08);
+      background:rgba(255,255,255,0.4);
+      transform:scale(1.08);
     }
   </style>
 </head>
 <body>
 
-  <!-- Full-screen background image -->
-  <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" class="love-img" alt="Love background">
+  <!-- Change these to YOUR file names (must be in same folder as this HTML file) -->
+  <img src="image.jpeg" class="love-img" alt="You & Veduuuu">
 
-  <!-- Slight dark overlay -->
   <div class="overlay"></div>
 
-  <!-- Music control -->
   <audio id="bg-music" loop preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2021/12/04/audio_1b9f5b23b8.mp3?filename=love-story-114806.mp3" type="audio/mpeg">
-    <!-- Alternative: https://cdn.pixabay.com/download/audio/2022/03/15/audio_d4d7d078c8.mp3 (another romantic one) -->
+    <!-- Change to your music file name -->
+    <source src="music.mp3" type="audio/mpeg">
   </audio>
 
   <button id="music-btn">▶ Play Music</button>
 
   <script>
-    // ================= RANDOM POPPING HEARTS =================
+    // Popping hearts
     function createPopHeart() {
       const heart = document.createElement("div");
       heart.className = "heart-pop";
-      
-      // Random position
-      const x = Math.random() * window.innerWidth;
-      const y = Math.random() * window.innerHeight;
-      
-      heart.style.left = x + "px";
-      heart.style.top  = y + "px";
-      
-      // Random size & color variation
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top  = Math.random() * window.innerHeight + "px";
       const scale = 0.7 + Math.random() * 0.9;
       heart.style.transform = `rotate(-45deg) scale(${scale})`;
-      heart.style.setProperty('--random-delay', Math.random() * 0.4 + 's');
-      
-      // Slight color variation
       const hue = 330 + Math.floor(Math.random() * 30);
       heart.style.background = `hsl(${hue}, 90%, 60%)`;
-      heart.querySelectorAll('::before, ::after').forEach(el => {
-        el.style.background = `hsl(${hue}, 90%, 60%)`;
-      });
-
       document.body.appendChild(heart);
-
-      // Trigger animation
       heart.style.animation = `pop-beat 1.8s forwards`;
-      
-      // Remove after animation
       setTimeout(() => heart.remove(), 2200);
     }
-
-    // Create hearts randomly
     setInterval(createPopHeart, 600);
 
-    // ================= FLOATING EMOJIS =================
-    const emojis = ["❤️", "💖", "✨", "💫", "💋"];
+    // Floating emojis
+    const emojis = ["❤️","💖","✨","💫","💋"];
     setInterval(() => {
       const emoji = document.createElement("div");
       emoji.className = "emoji";
-      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      
-      emoji.style.left = Math.random() * 100 + "vw";
+      emoji.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      emoji.style.left = Math.random()*100 + "vw";
       emoji.style.bottom = "-10vh";
-      emoji.style.fontSize = (20 + Math.random() * 40) + "px";
-      
-      // Random horizontal drift
-      const drift = (Math.random() - 0.5) * 200;
+      emoji.style.fontSize = (20 + Math.random()*40) + "px";
+      const drift = (Math.random()-0.5)*200;
       emoji.style.transform = `translateX(${drift}px)`;
-      
       document.body.appendChild(emoji);
       setTimeout(() => emoji.remove(), 7000);
     }, 800);
 
-    // ================= MUSIC BUTTON =================
+    // Music button
     const music = document.getElementById("bg-music");
     const btn = document.getElementById("music-btn");
-
     btn.addEventListener("click", () => {
       if (music.paused || music.ended) {
-        music.play().catch(err => {
-          console.log("Autoplay prevented:", err);
-          // Some browsers may still block → user must interact
-        });
+        music.play().catch(e => console.log("Play needs click", e));
         btn.textContent = "⏸ Pause Music";
       } else {
         music.pause();
         btn.textContent = "▶ Play Music";
       }
     });
-
-    // Optional: Try gentle autoplay on mobile/desktop after load (usually blocked)
-    // music.volume = 0.4;
-    // music.play().catch(() => console.log("Autoplay blocked - waiting for user click"));
   </script>
 </body>
 </html>
